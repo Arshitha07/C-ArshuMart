@@ -32,7 +32,7 @@
 
             <button type="submit">Create Account</button>
 
-        </form>
+        <form id="registerForm"></form>
 
         <p class="register-text">
             Already have an account?
@@ -40,7 +40,12 @@
         </p>
 
     </div>
-
+<script>
+    document.getElementById("registerForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        window.location.href = "index.html";
+    });
+</script>
     <script src="js/script.js"></script>
 
 </body>
