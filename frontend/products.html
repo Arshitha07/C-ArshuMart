@@ -1,110 +1,3554 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ArshuMart - Products</title>
+    <title>ArshuMart - Smart Shopping</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #071a35;
+            --navy2: #0d2d5c;
+            --blue: #1769e0;
+            --orange: #ffad18;
+            --orange2: #ff8c00;
+            --white: #ffffff;
+            --bg: #f5f7fb;
+            --text: #10213d;
+            --muted: #687890;
+            --border: #e1e7f0;
+            --green: #16a34a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+            min-height: 78px;
+            background: linear-gradient(100deg, #06172e, #0d2d5c);
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 12px 4%;
+            gap: 25px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .18);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 220px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #ffc229, #ff8b00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 8px 25px rgba(255, 166, 20, .35);
+        }
+
+        .logo-text h1 {
+            font-size: 27px;
+            letter-spacing: -1px;
+        }
+
+        .logo-text h1 span {
+            color: var(--orange);
+        }
+
+        .logo-text p {
+            font-size: 11px;
+            color: #cbd8ec;
+            margin-top: 3px;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 620px;
+            height: 46px;
+            display: flex;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0 18px;
+            font-size: 14px;
+            border-radius: 12px 0 0 12px;
+        }
+
+        .search-box button {
+            width: 62px;
+            border: none;
+            background: linear-gradient(135deg, #ffc229, #ff9710);
+            font-size: 18px;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .nav {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 10px 11px;
+            border-radius: 9px;
+            transition: .2s;
+            white-space: nowrap;
+        }
+
+        .nav a:hover {
+            background: rgba(255, 255, 255, .12);
+        }
+
+        .wishlist-link {
+            position: relative;
+        }
+
+        .wishlist-count {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            background: #ef4444;
+            color: white;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            font-size: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            width: 94%;
+            max-width: 1500px;
+            min-height: 355px;
+            margin: 20px auto 38px;
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 45px 60px;
+
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(255, 178, 28, .30),
+                    transparent 24%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(23, 105, 224, .18),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    115deg,
+                    #edf5ff,
+                    #ffffff 48%,
+                    #fff0dc
+                );
+
+            box-shadow: 0 20px 55px rgba(16, 43, 82, .13);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            right: -170px;
+            top: -250px;
+            border-radius: 50%;
+            background: rgba(23, 105, 224, .10);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 570px;
+        }
+
+        .hero-small {
+            color: #326bc0;
+            font-size: 17px;
+            font-weight: 600;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            line-height: 1.04;
+            color: #10294e;
+            letter-spacing: -2px;
+        }
+
+        .hero h2 span {
+            color: var(--orange2);
+        }
+
+        .hero-description {
+            margin-top: 15px;
+            color: #5c6d84;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .shop-btn,
+        .explore-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 13px 22px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .shop-btn {
+            background: linear-gradient(135deg, #ffbd25, #ff9008);
+            color: #17243a;
+            box-shadow: 0 9px 22px rgba(255, 157, 16, .25);
+        }
+
+        .explore-btn {
+            border: 1px solid #cbd7e8;
+            background: white;
+            color: #17355f;
+        }
+
+        .hero-products {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: end;
+            gap: 14px;
+        }
+
+        .hero-product {
+            width: 135px;
+            height: 175px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .78);
+            box-shadow: 0 18px 35px rgba(20, 50, 100, .15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transform: rotate(-5deg);
+        }
+
+        .hero-product:nth-child(2) {
+            transform: translateY(-24px) rotate(3deg);
+        }
+
+        .hero-product:nth-child(3) {
+            transform: rotate(-1deg);
+        }
+
+        .hero-product img {
+            width: 92%;
+            height: 92%;
+            object-fit: contain;
+        }
+
+
+        /* =====================================================
+           OFFERS
+        ===================================================== */
+
+        .offer-bar {
+            width: 92%;
+            max-width: 1400px;
+            margin: 0 auto 38px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 17px;
+        }
+
+        .offer-card {
+            min-height: 125px;
+            padding: 22px 25px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 28px rgba(20, 40, 80, .08);
+        }
+
+        .offer-card:nth-child(1) {
+            background: linear-gradient(135deg, #e7ddff, #d5c5ff);
+        }
+
+        .offer-card:nth-child(2) {
+            background: linear-gradient(135deg, #ffe0d8, #ffc5b7);
+        }
+
+        .offer-card:nth-child(3) {
+            background: linear-gradient(135deg, #dff4e5, #c5e9ce);
+        }
+
+        .offer-card h3 {
+            font-size: 19px;
+            margin-bottom: 7px;
+        }
+
+        .offer-card p {
+            font-size: 12px;
+            color: #51627a;
+            margin-bottom: 14px;
+        }
+
+        .offer-card a {
+            color: #132d52;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .offer-number {
+            position: absolute;
+            right: 20px;
+            bottom: 7px;
+            font-size: 55px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, .45);
+        }
+
+
+        /* =====================================================
+           GENERAL SECTION
+        ===================================================== */
+
+        .section {
+            width: 92%;
+            max-width: 1400px;
+            margin: 0 auto 45px;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .section-title h2 {
+            font-size: 25px;
+            letter-spacing: -.5px;
+        }
+
+        .section-title p {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+
+        /* =====================================================
+           CATEGORIES
+        ===================================================== */
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 12px;
+        }
+
+        .category-card {
+            min-height: 112px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 19px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .25s;
+            box-shadow: 0 5px 18px rgba(15, 35, 70, .04);
+        }
+
+        .category-card:hover,
+        .category-card.active {
+            transform: translateY(-5px);
+            border-color: var(--orange);
+            box-shadow: 0 14px 30px rgba(20, 50, 100, .11);
+        }
+
+        .category-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 9px;
+        }
+
+        .category-card:nth-child(1) .category-icon { background: #fff1cc; }
+        .category-card:nth-child(2) .category-icon { background: #e6efff; }
+        .category-card:nth-child(3) .category-icon { background: #ffe5ed; }
+        .category-card:nth-child(4) .category-icon { background: #dcf6e9; }
+        .category-card:nth-child(5) .category-icon { background: #fff0df; }
+        .category-card:nth-child(6) .category-icon { background: #e8eaff; }
+        .category-card:nth-child(7) .category-icon { background: #dff4ff; }
+        .category-card:nth-child(8) .category-icon { background: #fff0d5; }
+        .category-card:nth-child(9) .category-icon { background: #ddf6ef; }
+        .category-card:nth-child(10) .category-icon { background: #e4efff; }
+
+        .category-card span {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           FILTER BAR
+        ===================================================== */
+
+        .filter-bar {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            box-shadow: 0 5px 18px rgba(20, 40, 80, .04);
+        }
+
+        .filter-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #455773;
+        }
+
+        .filter-chip {
+            border: 1px solid var(--border);
+            background: #f8fafc;
+            color: #304361;
+            padding: 8px 13px;
+            border-radius: 20px;
+            font-size: 11px;
+        }
+
+        .filter-chip.active {
+            background: #fff2d1;
+            border-color: #ffb51b;
+            color: #7b4b00;
+        }
+
+        .sort-select {
+            border: 1px solid var(--border);
+            background: white;
+            padding: 9px 13px;
+            border-radius: 9px;
+            outline: none;
+            color: #243653;
+        }
+
+
+        /* =====================================================
+           PRODUCT GRID
+        ===================================================== */
+
+        .product-tools {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .result-count {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+            transition: .28s;
+            box-shadow: 0 7px 22px rgba(20, 40, 80, .06);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 38px rgba(20, 40, 80, .14);
+        }
+
+        .product-image {
+            height: 215px;
+            margin: 10px;
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #f4f7fb, #e9eef6);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .35s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.06);
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 3;
+            padding: 6px 10px;
+            border-radius: 7px;
+            font-size: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .badge.orange { background: #ff9d0b; }
+        .badge.green { background: #20b981; }
+        .badge.purple { background: #7655df; }
+        .badge.red { background: #ef4444; }
+        .badge.blue { background: #1769e0; }
+
+        .wishlist {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 34px;
+            height: 34px;
+            border: none;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .10);
+            font-size: 17px;
+            z-index: 4;
+            color: #17243a;
+        }
+
+        .wishlist.saved {
+            color: #ef4444;
+        }
+
+        .product-info {
+            padding: 7px 14px 15px;
+        }
+
+        .product-category {
+            color: #3573d1;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .product-name {
+            font-size: 15px;
+            line-height: 1.3;
+            min-height: 39px;
+            margin-bottom: 7px;
+        }
+
+        .product-description {
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.45;
+            min-height: 32px;
+            margin-bottom: 8px;
+        }
+
+        .rating {
+            font-size: 11px;
+            color: #f5a800;
+            margin-bottom: 10px;
+        }
+
+        .rating span {
+            color: #66768c;
+            margin-left: 5px;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: 800;
+            color: #10233f;
+        }
+
+        .old-price {
+            color: #9aa5b5;
+            font-size: 11px;
+            text-decoration: line-through;
+        }
+
+        .discount {
+            color: #168447;
+            background: #dcf7e8;
+            padding: 4px 7px;
+            border-radius: 5px;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 7px;
+        }
+
+        .buy-btn {
+            flex: 1;
+            border: none;
+            height: 38px;
+            border-radius: 9px;
+            background: linear-gradient(135deg, #ffb51b, #ff9708);
+            color: #16243a;
+            font-weight: bold;
+            transition: .2s;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 15px rgba(255, 157, 10, .23);
+        }
+
+        .cart-btn {
+            width: 43px;
+            border: none;
+            border-radius: 9px;
+            background: #09254a;
+            color: white;
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           DIFFERENT PRODUCT SECTIONS
+        ===================================================== */
+
+        .theme-section {
+            border-radius: 25px;
+            padding: 28px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+
+        .theme-section.electronics {
+            background:
+                radial-gradient(circle at 90% 10%, rgba(59, 130, 246, .16), transparent 25%),
+                linear-gradient(135deg, #edf4ff, #ffffff);
+            border: 1px solid #d8e6ff;
+        }
+
+        .theme-section.fashion {
+            background:
+                radial-gradient(circle at 10% 10%, rgba(236, 72, 153, .13), transparent 25%),
+                linear-gradient(135deg, #fff1f6, #ffffff);
+            border: 1px solid #f4d8e4;
+        }
+
+        .theme-section.beauty {
+            background:
+                radial-gradient(circle at 90% 20%, rgba(34, 197, 94, .12), transparent 25%),
+                linear-gradient(135deg, #edfff5, #ffffff);
+            border: 1px solid #d4f1df;
+        }
+
+        .theme-section.home {
+            background:
+                radial-gradient(circle at 10% 80%, rgba(245, 158, 11, .14), transparent 25%),
+                linear-gradient(135deg, #fff8ec, #ffffff);
+            border: 1px solid #f2e2c3;
+        }
+
+        .theme-section.books {
+            background:
+                radial-gradient(circle at 90% 10%, rgba(124, 58, 237, .14), transparent 25%),
+                linear-gradient(135deg, #f5f1ff, #ffffff);
+            border: 1px solid #e3d9fb;
+        }
+
+        .theme-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .theme-heading h2 {
+            font-size: 26px;
+        }
+
+        .theme-heading p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .theme-quote {
+            font-size: 12px;
+            font-style: italic;
+            color: #52647e;
+            text-align: right;
+            max-width: 300px;
+        }
+
+        .section-products {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+
+        /* =====================================================
+           WISHLIST
+        ===================================================== */
+
+        .wishlist-section {
+            display: none;
+            background:
+                radial-gradient(circle at 90% 10%, rgba(239, 68, 68, .10), transparent 25%),
+                linear-gradient(135deg, #fff6f6, #ffffff);
+            border: 1px solid #f3d5d5;
+            border-radius: 25px;
+            padding: 28px;
+            margin-bottom: 45px;
+        }
+
+        .wishlist-section.show {
+            display: block;
+        }
+
+        .wishlist-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .wishlist-header h2 {
+            font-size: 25px;
+        }
+
+        .wishlist-header p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .clear-wishlist {
+            border: 1px solid #efbcbc;
+            background: white;
+            color: #c03939;
+            padding: 9px 13px;
+            border-radius: 9px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        .wishlist-empty {
+            padding: 35px;
+            text-align: center;
+            color: var(--muted);
+            background: rgba(255, 255, 255, .7);
+            border-radius: 15px;
+            grid-column: 1 / -1;
+        }
+
+
+        /* =====================================================
+           PROMO BANNERS
+        ===================================================== */
+
+        .promo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .promo {
+            min-height: 170px;
+            border-radius: 22px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .promo:nth-child(1) {
+            background: linear-gradient(135deg, #ded2ff, #c8b7ff);
+        }
+
+        .promo:nth-child(2) {
+            background: linear-gradient(135deg, #ffd6ce, #ffb9aa);
+        }
+
+        .promo:nth-child(3) {
+            background: linear-gradient(135deg, #d8efd7, #bfe4c1);
+        }
+
+        .promo-content {
+            position: relative;
+            z-index: 2;
+            max-width: 260px;
+        }
+
+        .promo h3 {
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .promo p {
+            font-size: 11px;
+            color: #50627b;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .promo a {
+            color: #10294e;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .promo-decoration {
+            position: absolute;
+            right: -25px;
+            bottom: -50px;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .35);
+        }
+
+
+        /* =====================================================
+           TRUST
+        ===================================================== */
+
+        .trust-strip {
+            width: 92%;
+            max-width: 1400px;
+            margin: 0 auto 45px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 22px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            box-shadow: 0 8px 25px rgba(20, 40, 80, .05);
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border-right: 1px solid #e6ebf2;
+        }
+
+        .trust-item:last-child {
+            border-right: none;
+        }
+
+        .trust-icon {
+            font-size: 24px;
+        }
+
+        .trust-item strong {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+
+        .trust-item span {
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            background: linear-gradient(110deg, #06162c, #0d2d5b);
+            color: white;
+            padding: 45px 6% 25px;
+            margin-top: 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        footer h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        footer h3 span {
+            color: var(--orange);
+        }
+
+        footer p {
+            color: #b9c8dc;
+            font-size: 12px;
+            line-height: 1.7;
+            max-width: 350px;
+        }
+
+        footer h4 {
+            margin-bottom: 13px;
+            font-size: 13px;
+        }
+
+        footer a {
+            display: block;
+            color: #c1cee0;
+            text-decoration: none;
+            font-size: 11px;
+            margin-bottom: 9px;
+        }
+
+        footer a:hover {
+            color: var(--orange);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, .12);
+            margin-top: 35px;
+            padding-top: 20px;
+            color: #93a7c1;
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           LOADING / EMPTY
+        ===================================================== */
+
+        .loading,
+        .empty {
+            grid-column: 1 / -1;
+            background: white;
+            border-radius: 18px;
+            padding: 60px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1200px) {
+
+            .category-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .product-grid,
+            .section-products,
+            .wishlist-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .hero-products {
+                display: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+
+            .header {
+                height: auto;
+                padding: 14px 4%;
+                flex-wrap: wrap;
+            }
+
+            .logo {
+                min-width: auto;
+            }
+
+            .search-box {
+                order: 3;
+                flex-basis: 100%;
+                max-width: none;
+            }
+
+            .nav {
+                margin-left: auto;
+                overflow-x: auto;
+            }
+
+            .hero {
+                padding: 35px;
+                min-height: 320px;
+            }
+
+            .hero h2 {
+                font-size: 39px;
+            }
+
+            .offer-bar,
+            .promo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-grid,
+            .section-products,
+            .wishlist-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .trust-strip {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .trust-item {
+                border-right: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .theme-quote {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .nav a {
+                padding: 8px 6px;
+                font-size: 10px;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .product-grid,
+            .section-products,
+            .wishlist-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                width: 94%;
+                padding: 30px 24px;
+            }
+
+            .hero h2 {
+                font-size: 34px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .theme-section {
+                padding: 18px;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .product-tools {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .sort-select {
+                width: 100%;
+            }
+
+            .trust-strip {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
 </head>
+
 
 <body>
 
-    <header class="products-header">
 
-        <div class="brand">
-            <h1>ArshuMart</h1>
-            <p>Smart Shopping. Better Choices.</p>
-        </div>
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+
+    <header class="header">
+
+        <a href="products.html" class="logo">
+
+            <div class="logo-icon">
+                🛍
+            </div>
+
+            <div class="logo-text">
+
+                <h1>
+                    Arshu<span>Mart</span>
+                </h1>
+
+                <p>
+                    Smart Shopping. Better Choices.
+                </p>
+
+            </div>
+
+        </a>
+
 
         <div class="search-box">
-            <input type="text" placeholder="Search products...">
-            <button type="button">Search</button>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search for products, brands and more..."
+            >
+
+            <button id="searchButton" type="button">
+                🔍
+            </button>
+
         </div>
 
-        <div class="header-actions">
-            <button type="button">Cart</button>
-            <button type="button">My Account</button>
-        </div>
+
+        <nav class="nav">
+
+            <a href="products.html">
+                Home
+            </a>
+
+            <a href="#products">
+                Shop
+            </a>
+
+            <a href="#wishlist" class="wishlist-link">
+                ❤️ Wishlist
+                <span class="wishlist-count" id="wishlistCount">
+                    0
+                </span>
+            </a>
+
+            <a href="cart.html">
+                🛒 Cart
+            </a>
+
+            <a href="orders.html">
+                My Orders
+            </a>
+
+            <a href="index.html">
+                Account
+            </a>
+
+        </nav>
 
     </header>
 
 
-    <main>
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
 
-        <section class="welcome-section">
+    <section class="hero">
 
-            <h2>Explore Our Products</h2>
+        <div class="hero-content">
 
-            <p>
-                Discover quality products from different categories,
-                all in one place.
+            <div class="hero-small">
+                Discover More ✦
+            </div>
+
+            <h2>
+                Premium Quality
+                <br>
+                Products
+                <span>Just For You</span>
+            </h2>
+
+            <p class="hero-description">
+                Discover products you love,
+                explore new favourites and
+                enjoy a smarter way to shop.
             </p>
 
-        </section>
+            <div class="hero-buttons">
 
+                <a href="#products" class="shop-btn">
+                    Shop Now →
+                </a>
 
-        <section class="categories-section">
-
-            <h2>Shop by Category</h2>
-
-            <div class="category-list">
-
-                <button type="button">Electronics</button>
-                <button type="button">Fashion</button>
-                <button type="button">Beauty</button>
-                <button type="button">Home & Kitchen</button>
-                <button type="button">Books</button>
-                <button type="button">Sports</button>
+                <a href="#categories" class="explore-btn">
+                    Explore Categories
+                </a>
 
             </div>
 
-        </section>
+        </div>
 
 
-        <section class="products-section">
+        <div class="hero-products">
 
-            <h2>Featured Products</h2>
+            <div class="hero-product">
+                <img
+                    src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80"
+                    alt="Headphones"
+                >
+            </div>
 
-            <div class="product-grid">
+            <div class="hero-product">
+                <img
+                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80"
+                    alt="Smart Watch"
+                >
+            </div>
 
-                <div class="product-card">
-                    <div class="product-image">Product Image</div>
-                    <h3>Wireless Headphones</h3>
-                    <p>Premium wireless audio</p>
-                    <strong>₹1,499</strong>
-                    <button type="button">Add to Cart</button>
-                </div>
+            <div class="hero-product">
+                <img
+                    src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80"
+                    alt="Shoes"
+                >
+            </div>
 
-                <div class="product-card">
-                    <div class="product-image">Product Image</div>
-                    <h3>Smart Watch</h3>
-                    <p>Smart fitness companion</p>
-                    <strong>₹2,499</strong>
-                    <button type="button">Add to Cart</button>
-                </div>
+        </div>
 
-                <div class="product-card">
-                    <div class="product-image">Product Image</div>
-                    <h3>Everyday Backpack</h3>
-                    <p>Comfortable and durable</p>
-                    <strong>₹899</strong>
-                    <button type="button">Add to Cart</button>
-                </div>
+    </section>
+
+
+    <!-- =====================================================
+         OFFERS
+    ===================================================== -->
+
+    <section class="offer-bar">
+
+        <div class="offer-card">
+
+            <h3>
+                Electronics Fest
+            </h3>
+
+            <p>
+                Smart gadgets at exciting prices.
+            </p>
+
+            <a href="#electronics">
+                Explore Electronics →
+            </a>
+
+            <div class="offer-number">
+                40%
+            </div>
+
+        </div>
+
+
+        <div class="offer-card">
+
+            <h3>
+                Fashion Collection
+            </h3>
+
+            <p>
+                Fresh styles for every occasion.
+            </p>
+
+            <a href="#fashion">
+                Shop Fashion →
+            </a>
+
+            <div class="offer-number">
+                50%
+            </div>
+
+        </div>
+
+
+        <div class="offer-card">
+
+            <h3>
+                Home Essentials
+            </h3>
+
+            <p>
+                Make your home more comfortable.
+            </p>
+
+            <a href="#home">
+                Shop Home →
+            </a>
+
+            <div class="offer-number">
+                35%
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CATEGORIES
+    ===================================================== -->
+
+    <section class="section" id="categories">
+
+        <div class="section-title">
+
+            <div>
+
+                <h2>
+                    Shop by Category
+                </h2>
+
+                <p>
+                    Find what you love faster
+                </p>
 
             </div>
 
-        </section>
+            <p>
+                Explore All →
+            </p>
 
-    </main>
+        </div>
 
+
+        <div class="category-grid">
+
+            <div class="category-card active" data-category="All">
+                <div class="category-icon">▦</div>
+                <span>All</span>
+            </div>
+
+            <div class="category-card" data-category="Electronics">
+                <div class="category-icon">💻</div>
+                <span>Electronics</span>
+            </div>
+
+            <div class="category-card" data-category="Fashion">
+                <div class="category-icon">👕</div>
+                <span>Fashion</span>
+            </div>
+
+            <div class="category-card" data-category="Beauty">
+                <div class="category-icon">🧴</div>
+                <span>Beauty</span>
+            </div>
+
+            <div class="category-card" data-category="Home & Living">
+                <div class="category-icon">🛋</div>
+                <span>Home & Living</span>
+            </div>
+
+            <div class="category-card" data-category="Books">
+                <div class="category-icon">📚</div>
+                <span>Books</span>
+            </div>
+
+            <div class="category-card" data-category="Sports">
+                <div class="category-icon">🏋</div>
+                <span>Sports</span>
+            </div>
+
+            <div class="category-card" data-category="Toys">
+                <div class="category-icon">🧸</div>
+                <span>Toys</span>
+            </div>
+
+            <div class="category-card" data-category="Groceries">
+                <div class="category-icon">🛒</div>
+                <span>Groceries</span>
+            </div>
+
+            <div class="category-card" data-category="Accessories">
+                <div class="category-icon">⌚</div>
+                <span>Accessories</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MAIN PRODUCTS
+    ===================================================== -->
+
+    <section class="section" id="products">
+
+        <div class="section-title">
+
+            <div>
+
+                <h2>
+                    All Products
+                </h2>
+
+                <p>
+                    Fresh picks • Great offers • Best value
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="filter-bar">
+
+            <div class="filter-left">
+
+                <span class="filter-label">
+                    Quick Filter:
+                </span>
+
+                <button
+                    class="filter-chip active"
+                    data-filter="all"
+                >
+                    All
+                </button>
+
+                <button
+                    class="filter-chip"
+                    data-filter="low"
+                >
+                    Under ₹1,000
+                </button>
+
+                <button
+                    class="filter-chip"
+                    data-filter="mid"
+                >
+                    ₹1,000 – ₹5,000
+                </button>
+
+                <button
+                    class="filter-chip"
+                    data-filter="high"
+                >
+                    Above ₹5,000
+                </button>
+
+            </div>
+
+
+            <select class="sort-select" id="sortSelect">
+
+                <option value="default">
+                    Sort: Recommended
+                </option>
+
+                <option value="low">
+                    Price: Low to High
+                </option>
+
+                <option value="high">
+                    Price: High to Low
+                </option>
+
+                <option value="name">
+                    Name: A to Z
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="product-tools">
+
+            <div
+                class="result-count"
+                id="resultCount"
+            >
+                Loading products...
+            </div>
+
+        </div>
+
+
+        <div
+            class="product-grid"
+            id="productGrid"
+        >
+
+            <div class="loading">
+                Loading ArshuMart products...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         WISHLIST
+    ===================================================== -->
+
+    <section
+        class="section wishlist-section"
+        id="wishlist"
+    >
+
+        <div class="wishlist-header">
+
+            <div>
+
+                <h2>
+                    ❤️ My Wishlist
+                </h2>
+
+                <p>
+                    Products you saved for later
+                </p>
+
+            </div>
+
+            <button
+                class="clear-wishlist"
+                id="clearWishlist"
+                type="button"
+            >
+                Clear Wishlist
+            </button>
+
+        </div>
+
+
+        <div
+            class="wishlist-grid"
+            id="wishlistGrid"
+        ></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ELECTRONICS SECTION
+    ===================================================== -->
+
+    <section
+        class="section theme-section electronics"
+        id="electronics"
+    >
+
+        <div class="theme-heading">
+
+            <div>
+
+                <h2>
+                    ⚡ Smart Electronics
+                </h2>
+
+                <p>
+                    Technology that keeps life connected.
+                </p>
+
+            </div>
+
+            <div class="theme-quote">
+                “Upgrade your everyday with smarter choices.”
+            </div>
+
+        </div>
+
+
+        <div
+            class="section-products"
+            id="electronicsProducts"
+        >
+
+            <div class="loading">
+                Loading electronics...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FASHION SECTION
+    ===================================================== -->
+
+    <section
+        class="section theme-section fashion"
+        id="fashion"
+    >
+
+        <div class="theme-heading">
+
+            <div>
+
+                <h2>
+                    ✦ Fashion Edit
+                </h2>
+
+                <p>
+                    Fresh looks for your everyday style.
+                </p>
+
+            </div>
+
+            <div class="theme-quote">
+                “Your style tells your story.”
+            </div>
+
+        </div>
+
+
+        <div
+            class="section-products"
+            id="fashionProducts"
+        >
+
+            <div class="loading">
+                Loading fashion...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         BEAUTY SECTION
+    ===================================================== -->
+
+    <section
+        class="section theme-section beauty"
+        id="beauty"
+    >
+
+        <div class="theme-heading">
+
+            <div>
+
+                <h2>
+                    ✿ Beauty & Care
+                </h2>
+
+                <p>
+                    Everyday essentials for your routine.
+                </p>
+
+            </div>
+
+            <div class="theme-quote">
+                “Small routines can create beautiful days.”
+            </div>
+
+        </div>
+
+
+        <div
+            class="section-products"
+            id="beautyProducts"
+        >
+
+            <div class="loading">
+                Loading beauty products...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         HOME SECTION
+    ===================================================== -->
+
+    <section
+        class="section theme-section home"
+        id="home"
+    >
+
+        <div class="theme-heading">
+
+            <div>
+
+                <h2>
+                    🏡 Home & Living
+                </h2>
+
+                <p>
+                    Comfort, usefulness and style for your space.
+                </p>
+
+            </div>
+
+            <div class="theme-quote">
+                “A better home begins with thoughtful choices.”
+            </div>
+
+        </div>
+
+
+        <div
+            class="section-products"
+            id="homeProducts"
+        >
+
+            <div class="loading">
+                Loading home products...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         BOOKS SECTION
+    ===================================================== -->
+
+    <section
+        class="section theme-section books"
+        id="books"
+    >
+
+        <div class="theme-heading">
+
+            <div>
+
+                <h2>
+                    📚 Books & Learning
+                </h2>
+
+                <p>
+                    Ideas, knowledge and stories worth discovering.
+                </p>
+
+            </div>
+
+            <div class="theme-quote">
+                “Every page can open a new possibility.”
+            </div>
+
+        </div>
+
+
+        <div
+            class="section-products"
+            id="booksProducts"
+        >
+
+            <div class="loading">
+                Loading books...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PROMO BANNERS
+    ===================================================== -->
+
+    <section class="section">
+
+        <div class="promo-grid">
+
+            <div class="promo">
+
+                <div class="promo-content">
+
+                    <h3>
+                        Electronics for a
+                        Smarter Tomorrow
+                    </h3>
+
+                    <p>
+                        Latest gadgets and
+                        smart technology at
+                        amazing prices.
+                    </p>
+
+                    <a href="#electronics">
+                        Explore Electronics →
+                    </a>
+
+                </div>
+
+                <div class="promo-decoration"></div>
+
+            </div>
+
+
+            <div class="promo">
+
+                <div class="promo-content">
+
+                    <h3>
+                        Fashion That
+                        Defines You
+                    </h3>
+
+                    <p>
+                        Trendy styles, fresh
+                        collections and
+                        everyday essentials.
+                    </p>
+
+                    <a href="#fashion">
+                        Shop Fashion →
+                    </a>
+
+                </div>
+
+                <div class="promo-decoration"></div>
+
+            </div>
+
+
+            <div class="promo">
+
+                <div class="promo-content">
+
+                    <h3>
+                        Home Essentials
+                        For A Better You
+                    </h3>
+
+                    <p>
+                        Comfort, style and
+                        useful products for
+                        every home.
+                    </p>
+
+                    <a href="#home">
+                        Shop Home →
+                    </a>
+
+                </div>
+
+                <div class="promo-decoration"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         TRUST
+    ===================================================== -->
+
+    <div class="trust-strip">
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                🚚
+            </div>
+
+            <div>
+                <strong>Fast Delivery</strong>
+                <span>Get your orders on time</span>
+            </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                🔒
+            </div>
+
+            <div>
+                <strong>Secure Shopping</strong>
+                <span>Your data stays protected</span>
+            </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                💰
+            </div>
+
+            <div>
+                <strong>Best Prices</strong>
+                <span>Great value every day</span>
+            </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                ⭐
+            </div>
+
+            <div>
+                <strong>Quality Products</strong>
+                <span>Shop with confidence</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
 
     <footer>
 
-        <p>© 2026 ArshuMart. All Rights Reserved.</p>
+        <div class="footer-grid">
+
+            <div>
+
+                <h3>
+                    Arshu<span>Mart</span>
+                </h3>
+
+                <p>
+                    Smart shopping made simple.
+                    Discover quality products,
+                    exciting offers and a better
+                    online shopping experience.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h4>Shop</h4>
+
+                <a href="#products">
+                    All Products
+                </a>
+
+                <a href="#categories">
+                    Categories
+                </a>
+
+                <a href="#electronics">
+                    Electronics
+                </a>
+
+                <a href="#fashion">
+                    Fashion
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h4>Account</h4>
+
+                <a href="index.html">
+                    Login
+                </a>
+
+                <a href="register.html">
+                    Create Account
+                </a>
+
+                <a href="orders.html">
+                    My Orders
+                </a>
+
+                <a href="cart.html">
+                    My Cart
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h4>ArshuMart</h4>
+
+                <a href="#categories">
+                    About Us
+                </a>
+
+                <a href="#products">
+                    Help Centre
+                </a>
+
+                <a href="#wishlist">
+                    Wishlist
+                </a>
+
+                <a href="#">
+                    Privacy
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 ArshuMart.
+            Smart Shopping. Better Choices.
+
+        </div>
 
     </footer>
 
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+        const API_URL =
+            "http://127.0.0.1:8080/api/products";
+
+
+        const productGrid =
+            document.getElementById("productGrid");
+
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+
+        const searchButton =
+            document.getElementById("searchButton");
+
+
+        const resultCount =
+            document.getElementById("resultCount");
+
+
+        const sortSelect =
+            document.getElementById("sortSelect");
+
+
+        const wishlistSection =
+            document.getElementById("wishlist");
+
+
+        const wishlistGrid =
+            document.getElementById("wishlistGrid");
+
+
+        const wishlistCount =
+            document.getElementById("wishlistCount");
+
+
+        let allProducts = [];
+
+        let selectedCategory = "All";
+
+        let selectedPriceFilter = "all";
+
+
+        /* =====================================================
+           FALLBACK IMAGES
+        ===================================================== */
+
+        const fallbackImages = {
+
+            "electronics":
+                "https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=700&q=80",
+
+            "fashion":
+                "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80",
+
+            "beauty":
+                "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=80",
+
+            "home & living":
+                "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=700&q=80",
+
+            "books":
+                "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=700&q=80",
+
+            "sports":
+                "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=700&q=80",
+
+            "toys":
+                "https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=700&q=80",
+
+            "groceries":
+                "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=700&q=80",
+
+            "accessories":
+                "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80"
+
+        };
+
+
+        /* =====================================================
+           BADGES
+        ===================================================== */
+
+        const badges = [
+            ["Best Seller", "orange"],
+            ["New", "green"],
+            ["Top Rated", "purple"],
+            ["Hot Deal", "red"],
+            ["Trending", "blue"]
+        ];
+
+
+        /* =====================================================
+           LOAD PRODUCTS
+        ===================================================== */
+
+        async function loadProducts() {
+
+            try {
+
+                const response =
+                    await fetch(API_URL);
+
+
+                if (!response.ok) {
+                    throw new Error("Backend unavailable");
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !data.success ||
+                    !Array.isArray(data.products)
+                ) {
+                    throw new Error(
+                        "Product data unavailable"
+                    );
+                }
+
+
+                allProducts =
+                    data.products;
+
+
+                renderProducts();
+
+                renderCategorySections();
+
+                renderWishlist();
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+
+                productGrid.innerHTML = `
+
+                    <div class="empty">
+
+                        <h3>
+                            Unable to load products
+                        </h3>
+
+                        <p style="margin-top:10px;">
+                            Please make sure the
+                            ArshuMart backend is running.
+                        </p>
+
+                    </div>
+
+                `;
+
+
+                resultCount.textContent =
+                    "Products unavailable";
+
+                showSectionError("electronicsProducts");
+                showSectionError("fashionProducts");
+                showSectionError("beautyProducts");
+                showSectionError("homeProducts");
+                showSectionError("booksProducts");
+
+            }
+
+        }
+
+
+        /* =====================================================
+           SECTION ERROR
+        ===================================================== */
+
+        function showSectionError(id) {
+
+            const element =
+                document.getElementById(id);
+
+            if (element) {
+
+                element.innerHTML = `
+
+                    <div class="empty">
+
+                        Backend products unavailable.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           GET IMAGE
+        ===================================================== */
+
+        function getProductImage(product, index = 0) {
+
+            if (
+                product.image_url &&
+                String(product.image_url).trim() !== ""
+            ) {
+
+                return String(product.image_url);
+
+            }
+
+
+            if (
+                product.imageUrl &&
+                String(product.imageUrl).trim() !== ""
+            ) {
+
+                return String(product.imageUrl);
+
+            }
+
+
+            const category =
+                String(
+                    product.category || ""
+                )
+                .toLowerCase()
+                .trim();
+
+
+            return (
+                fallbackImages[category]
+                ||
+                fallbackImages.electronics
+            );
+
+        }
+
+
+        /* =====================================================
+           FILTER PRODUCTS
+        ===================================================== */
+
+        function getFilteredProducts() {
+
+            let products =
+                [...allProducts];
+
+
+            if (selectedCategory !== "All") {
+
+                products =
+                    products.filter(product =>
+
+                        String(product.category)
+                            .toLowerCase()
+                            .trim()
+                        ===
+                        selectedCategory
+                            .toLowerCase()
+                            .trim()
+
+                    );
+
+            }
+
+
+            const search =
+                searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+
+            if (search) {
+
+                products =
+                    products.filter(product =>
+
+                        String(product.name || "")
+                            .toLowerCase()
+                            .includes(search)
+
+                        ||
+
+                        String(product.description || "")
+                            .toLowerCase()
+                            .includes(search)
+
+                        ||
+
+                        String(product.category || "")
+                            .toLowerCase()
+                            .includes(search)
+
+                    );
+
+            }
+
+
+            if (selectedPriceFilter === "low") {
+
+                products =
+                    products.filter(
+                        product =>
+                            Number(product.price || 0)
+                            < 1000
+                    );
+
+            }
+
+
+            if (selectedPriceFilter === "mid") {
+
+                products =
+                    products.filter(
+                        product => {
+
+                            const price =
+                                Number(
+                                    product.price || 0
+                                );
+
+                            return (
+                                price >= 1000
+                                &&
+                                price <= 5000
+                            );
+
+                        }
+                    );
+
+            }
+
+
+            if (selectedPriceFilter === "high") {
+
+                products =
+                    products.filter(
+                        product =>
+                            Number(product.price || 0)
+                            > 5000
+                    );
+
+            }
+
+
+            const sort =
+                sortSelect.value;
+
+
+            if (sort === "low") {
+
+                products.sort(
+                    (a, b) =>
+                        Number(a.price || 0)
+                        -
+                        Number(b.price || 0)
+                );
+
+            }
+
+
+            if (sort === "high") {
+
+                products.sort(
+                    (a, b) =>
+                        Number(b.price || 0)
+                        -
+                        Number(a.price || 0)
+                );
+
+            }
+
+
+            if (sort === "name") {
+
+                products.sort(
+                    (a, b) =>
+                        String(a.name || "")
+                            .localeCompare(
+                                String(b.name || "")
+                            )
+                );
+
+            }
+
+
+            return products;
+
+        }
+
+
+        /* =====================================================
+           RENDER MAIN PRODUCTS
+        ===================================================== */
+
+        function renderProducts() {
+
+            const products =
+                getFilteredProducts();
+
+
+            resultCount.textContent =
+                `${products.length} products available`;
+
+
+            if (!products.length) {
+
+                productGrid.innerHTML = `
+
+                    <div class="empty">
+
+                        <h3>
+                            No products found
+                        </h3>
+
+                        <p style="margin-top:8px;">
+                            Try another search,
+                            category or price filter.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            productGrid.innerHTML =
+                products
+                    .map(
+                        product =>
+                            createProductCard(
+                                product
+                            )
+                    )
+                    .join("");
+
+        }
+
+
+        /* =====================================================
+           CATEGORY SECTIONS
+        ===================================================== */
+
+        function renderCategorySections() {
+
+            renderSingleCategory(
+                "Electronics",
+                "electronicsProducts"
+            );
+
+            renderSingleCategory(
+                "Fashion",
+                "fashionProducts"
+            );
+
+            renderSingleCategory(
+                "Beauty",
+                "beautyProducts"
+            );
+
+            renderSingleCategory(
+                "Home & Living",
+                "homeProducts"
+            );
+
+            renderSingleCategory(
+                "Books",
+                "booksProducts"
+            );
+
+        }
+
+
+        function renderSingleCategory(
+            category,
+            elementId
+        ) {
+
+            const element =
+                document.getElementById(elementId);
+
+
+            if (!element) {
+                return;
+            }
+
+
+            const products =
+                allProducts
+                    .filter(product =>
+                        String(product.category || "")
+                            .toLowerCase()
+                            .trim()
+                        ===
+                        category.toLowerCase()
+                            .trim()
+                    );
+
+
+            if (!products.length) {
+
+                element.innerHTML = `
+
+                    <div class="empty">
+
+                        No ${escapeHtml(category)}
+                        products available yet.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            /*
+               Important:
+               Only unique backend products are used.
+               No modulo duplication.
+            */
+
+            const selected =
+                products.slice(0, 5);
+
+
+            element.innerHTML =
+                selected
+                    .map(product =>
+                        createProductCard(product)
+                    )
+                    .join("");
+
+        }
+
+
+        /* =====================================================
+           PRODUCT CARD
+        ===================================================== */
+
+        function createProductCard(product) {
+
+            const productId =
+                Number(product.id);
+
+
+            const category =
+                String(
+                    product.category ||
+                    "Shopping"
+                );
+
+
+            const description =
+                String(
+                    product.description ||
+                    "Quality product from ArshuMart"
+                );
+
+
+            const price =
+                Number(
+                    product.price || 0
+                );
+
+
+            const oldPrice =
+                Math.round(
+                    price * 1.18
+                );
+
+
+            const discount =
+                oldPrice > 0
+                    ? Math.round(
+                        (
+                            (oldPrice - price)
+                            /
+                            oldPrice
+                        ) * 100
+                    )
+                    : 0;
+
+
+            const badgeIndex =
+                Math.abs(productId)
+                % badges.length;
+
+
+            const badge =
+                badges[badgeIndex];
+
+
+            const image =
+                getProductImage(product);
+
+
+            const isSaved =
+                isInWishlist(productId);
+
+
+            const imageBackground =
+                getCategoryBackground(
+                    category
+                );
+
+
+            return `
+
+                <article
+                    class="product-card"
+                    data-id="${productId}"
+                >
+
+                    <div
+                        class="product-image"
+                        style="
+                            background:
+                            linear-gradient(
+                                135deg,
+                                ${imageBackground},
+                                #f8fafc
+                            );
+                        "
+                    >
+
+                        <span
+                            class="badge ${badge[1]}"
+                        >
+                            ${badge[0]}
+                        </span>
+
+
+                        <button
+                            class="wishlist ${isSaved ? "saved" : ""}"
+                            type="button"
+                            onclick="toggleWishlist(${productId})"
+                            aria-label="Wishlist"
+                        >
+                            ${isSaved ? "♥" : "♡"}
+                        </button>
+
+
+                        <img
+                            src="${escapeAttribute(image)}"
+                            alt="${escapeAttribute(product.name)}"
+                            loading="lazy"
+                            onerror="this.src='${escapeAttribute(
+                                fallbackImages[
+                                    category.toLowerCase()
+                                ]
+                                ||
+                                fallbackImages.electronics
+                            )}'"
+                        >
+
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <div class="product-category">
+                            ${escapeHtml(category)}
+                        </div>
+
+
+                        <h3 class="product-name">
+                            ${escapeHtml(product.name)}
+                        </h3>
+
+
+                        <p class="product-description">
+                            ${escapeHtml(description)}
+                        </p>
+
+
+                        <div class="rating">
+                            ★★★★★
+
+                            <span>
+                                4.${(productId % 3) + 6}
+                                (${100 + (productId % 900)} reviews)
+                            </span>
+
+                        </div>
+
+
+                        <div class="price-row">
+
+                            <strong class="price">
+                                ₹${price.toLocaleString("en-IN")}
+                            </strong>
+
+                            <span class="old-price">
+                                ₹${oldPrice.toLocaleString("en-IN")}
+                            </span>
+
+                            <span class="discount">
+                                ${discount}% OFF
+                            </span>
+
+                        </div>
+
+
+                        <div class="product-actions">
+
+                            <button
+                                class="buy-btn"
+                                type="button"
+                                onclick="buyNow(${productId})"
+                            >
+                                Buy Now
+                            </button>
+
+
+                            <button
+                                class="cart-btn"
+                                type="button"
+                                onclick="addToCart(${productId})"
+                                title="Add to cart"
+                            >
+                                🛒
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            `;
+
+        }
+
+
+        /* =====================================================
+           CATEGORY BACKGROUND
+        ===================================================== */
+
+        function getCategoryBackground(category) {
+
+            const key =
+                category
+                    .toLowerCase()
+                    .trim();
+
+
+            const backgrounds = {
+
+                "electronics":
+                    "#e8f0ff",
+
+                "fashion":
+                    "#ffeaf2",
+
+                "beauty":
+                    "#e8f8ef",
+
+                "home & living":
+                    "#fff0dc",
+
+                "books":
+                    "#eee9ff",
+
+                "sports":
+                    "#e4f6ff",
+
+                "toys":
+                    "#fff2d5",
+
+                "groceries":
+                    "#e4f8ef",
+
+                "accessories":
+                    "#e8f0ff"
+
+            };
+
+
+            return (
+                backgrounds[key]
+                ||
+                "#f2f5fa"
+            );
+
+        }
+
+
+        /* =====================================================
+           WISHLIST STORAGE
+        ===================================================== */
+
+        function getWishlist() {
+
+            try {
+
+                const data =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "arshuMartWishlist"
+                        )
+                    );
+
+
+                return Array.isArray(data)
+                    ? data
+                    : [];
+
+            }
+
+            catch {
+
+                return [];
+
+            }
+
+        }
+
+
+        function saveWishlist(items) {
+
+            localStorage.setItem(
+                "arshuMartWishlist",
+                JSON.stringify(items)
+            );
+
+        }
+
+
+        function isInWishlist(productId) {
+
+            const wishlist =
+                getWishlist();
+
+
+            return wishlist.some(
+                item =>
+                    Number(item.productId)
+                    ===
+                    Number(productId)
+            );
+
+        }
+
+
+        /* =====================================================
+           TOGGLE WISHLIST
+        ===================================================== */
+
+        function toggleWishlist(productId) {
+
+            const product =
+                allProducts.find(
+                    item =>
+                        Number(item.id)
+                        ===
+                        Number(productId)
+                );
+
+
+            if (!product) {
+                return;
+            }
+
+
+            let wishlist =
+                getWishlist();
+
+
+            const existingIndex =
+                wishlist.findIndex(
+                    item =>
+                        Number(item.productId)
+                        ===
+                        Number(productId)
+                );
+
+
+            if (existingIndex >= 0) {
+
+                wishlist.splice(
+                    existingIndex,
+                    1
+                );
+
+            }
+
+            else {
+
+                wishlist.push({
+
+                    productId:
+                        Number(product.id),
+
+                    name:
+                        product.name,
+
+                    price:
+                        Number(product.price || 0),
+
+                    category:
+                        product.category,
+
+                    description:
+                        product.description,
+
+                    image:
+                        getProductImage(product)
+
+                });
+
+            }
+
+
+            saveWishlist(wishlist);
+
+
+            updateWishlistCount();
+
+            renderWishlist();
+
+            renderProducts();
+
+            renderCategorySections();
+
+        }
+
+
+        /* =====================================================
+           RENDER WISHLIST
+        ===================================================== */
+
+        function renderWishlist() {
+
+            const wishlist =
+                getWishlist();
+
+
+            if (!wishlist.length) {
+
+                wishlistSection.classList.remove(
+                    "show"
+                );
+
+
+                wishlistGrid.innerHTML = `
+
+                    <div class="wishlist-empty">
+
+                        <h3>
+                            Your wishlist is empty
+                        </h3>
+
+                        <p style="margin-top:8px;">
+                            Tap the heart on any product
+                            to save it here.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            wishlistSection.classList.add(
+                "show"
+            );
+
+
+            wishlistGrid.innerHTML =
+                wishlist
+                    .map(item =>
+                        createWishlistCard(item)
+                    )
+                    .join("");
+
+        }
+
+
+        /* =====================================================
+           WISHLIST CARD
+        ===================================================== */
+
+        function createWishlistCard(item) {
+
+            return `
+
+                <article
+                    class="product-card"
+                >
+
+                    <div class="product-image">
+
+                        <button
+                            class="wishlist saved"
+                            type="button"
+                            onclick="toggleWishlist(${Number(item.productId)})"
+                        >
+                            ♥
+                        </button>
+
+
+                        <img
+                            src="${escapeAttribute(item.image)}"
+                            alt="${escapeAttribute(item.name)}"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <div class="product-category">
+                            ${escapeHtml(item.category || "Shopping")}
+                        </div>
+
+
+                        <h3 class="product-name">
+                            ${escapeHtml(item.name)}
+                        </h3>
+
+
+                        <p class="product-description">
+                            ${escapeHtml(
+                                item.description ||
+                                "Saved product"
+                            )}
+                        </p>
+
+
+                        <div class="price-row">
+
+                            <strong class="price">
+                                ₹${Number(item.price || 0)
+                                    .toLocaleString("en-IN")}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="product-actions">
+
+                            <button
+                                class="buy-btn"
+                                type="button"
+                                onclick="buyNow(${Number(item.productId)})"
+                            >
+                                Buy Now
+                            </button>
+
+
+                            <button
+                                class="cart-btn"
+                                type="button"
+                                onclick="addToCart(${Number(item.productId)})"
+                            >
+                                🛒
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            `;
+
+        }
+
+
+        /* =====================================================
+           CLEAR WISHLIST
+        ===================================================== */
+
+        document
+            .getElementById("clearWishlist")
+            .addEventListener(
+                "click",
+                function() {
+
+                    localStorage.removeItem(
+                        "arshuMartWishlist"
+                    );
+
+
+                    updateWishlistCount();
+
+                    renderWishlist();
+
+                    renderProducts();
+
+                    renderCategorySections();
+
+                }
+            );
+
+
+        /* =====================================================
+           WISHLIST COUNT
+        ===================================================== */
+
+        function updateWishlistCount() {
+
+            const wishlist =
+                getWishlist();
+
+
+            wishlistCount.textContent =
+                wishlist.length;
+
+        }
+
+
+        /* =====================================================
+           ADD TO CART
+        ===================================================== */
+
+        function addToCart(productId) {
+
+            const product =
+                allProducts.find(
+                    item =>
+                        Number(item.id)
+                        ===
+                        Number(productId)
+                );
+
+
+            if (!product) {
+
+                alert(
+                    "Product could not be found."
+                );
+
+                return;
+
+            }
+
+
+            let cart = [];
+
+
+            try {
+
+                cart =
+                    JSON.parse(
+                        localStorage.getItem("cart")
+                    )
+                    || [];
+
+            }
+
+            catch {
+
+                cart = [];
+
+            }
+
+
+            const existing =
+                cart.find(
+                    item =>
+                        Number(
+                            item.productId ||
+                            item.id
+                        )
+                        ===
+                        Number(productId)
+                );
+
+
+            if (existing) {
+
+                existing.quantity =
+                    Number(
+                        existing.quantity || 1
+                    ) + 1;
+
+            }
+
+            else {
+
+                cart.push({
+
+                    productId:
+                        Number(product.id),
+
+                    quantity: 1,
+
+                    name:
+                        product.name,
+
+                    price:
+                        Number(product.price || 0),
+
+                    image:
+                        getProductImage(product)
+
+                });
+
+            }
+
+
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(cart)
+            );
+
+
+            alert(
+                `${product.name} added to cart!`
+            );
+
+        }
+
+
+        /* =====================================================
+           BUY NOW
+        ===================================================== */
+
+        function buyNow(productId) {
+
+            addToCart(productId);
+
+            window.location.href =
+                "cart.html";
+
+        }
+
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+
+        searchInput.addEventListener(
+            "input",
+            renderProducts
+        );
+
+
+        searchButton.addEventListener(
+            "click",
+            renderProducts
+        );
+
+
+        /* =====================================================
+           SORT
+        ===================================================== */
+
+        sortSelect.addEventListener(
+            "change",
+            renderProducts
+        );
+
+
+        /* =====================================================
+           PRICE FILTER
+        ===================================================== */
+
+        document
+            .querySelectorAll(
+                ".filter-chip"
+            )
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        document
+                            .querySelectorAll(
+                                ".filter-chip"
+                            )
+                            .forEach(
+                                item =>
+                                    item.classList.remove(
+                                        "active"
+                                    )
+                            );
+
+
+                        this.classList.add(
+                            "active"
+                        );
+
+
+                        selectedPriceFilter =
+                            this.dataset.filter;
+
+
+                        renderProducts();
+
+                    }
+                );
+
+            });
+
+
+        /* =====================================================
+           CATEGORY CLICK
+        ===================================================== */
+
+        document
+            .querySelectorAll(
+                ".category-card"
+            )
+            .forEach(card => {
+
+                card.addEventListener(
+                    "click",
+                    function() {
+
+                        document
+                            .querySelectorAll(
+                                ".category-card"
+                            )
+                            .forEach(
+                                item =>
+                                    item.classList.remove(
+                                        "active"
+                                    )
+                            );
+
+
+                        this.classList.add(
+                            "active"
+                        );
+
+
+                        selectedCategory =
+                            this.dataset.category;
+
+
+                        renderProducts();
+
+
+                        document
+                            .getElementById(
+                                "products"
+                            )
+                            .scrollIntoView({
+                                behavior:
+                                    "smooth"
+                            });
+
+                    }
+                );
+
+            });
+
+
+        /* =====================================================
+           WISHLIST LINK
+        ===================================================== */
+
+        document
+            .querySelector(
+                '.wishlist-link'
+            )
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+
+                    renderWishlist();
+
+
+                    wishlistSection.scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+                }
+            );
+
+
+        /* =====================================================
+           ESCAPE HTML
+        ===================================================== */
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+
+        }
+
+
+        function escapeAttribute(value) {
+
+            return escapeHtml(value);
+
+        }
+
+
+        /* =====================================================
+           START
+        ===================================================== */
+
+        updateWishlistCount();
+
+        loadProducts();
+
+    </script>
+
 </body>
+
 </html>

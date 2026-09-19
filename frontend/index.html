@@ -1,44 +1,998 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>ArshuMart - Login</title>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* =====================================================
+           ARSHUMART LOGIN PAGE
+           LOGIN BACKGROUND IS CONTROLLED HERE
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body.login-page {
+            min-height: 100vh;
+            width: 100%;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 12% 18%,
+                    rgba(0, 225, 255, 0.30),
+                    transparent 27%
+                ),
+                radial-gradient(
+                    circle at 90% 12%,
+                    rgba(255, 166, 0, 0.30),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 80% 90%,
+                    rgba(128, 70, 255, 0.32),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #030712 0%,
+                    #0b1740 38%,
+                    #174b83 65%,
+                    #29165c 100%
+                ) !important;
+        }
+
+        /* Decorative background shapes */
+
+        body.login-page::before {
+            content: "";
+            position: fixed;
+
+            width: 500px;
+            height: 500px;
+
+            left: -250px;
+            bottom: -280px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(0, 225, 255, 0.20),
+                    transparent 68%
+                );
+
+            pointer-events: none;
+        }
+
+        body.login-page::after {
+            content: "";
+            position: fixed;
+
+            width: 500px;
+            height: 500px;
+
+            right: -260px;
+            top: -280px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255, 166, 0, 0.22),
+                    transparent 68%
+                );
+
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+           TOP HEADER
+        ===================================================== */
+
+        .login-topbar {
+            position: relative;
+            z-index: 10;
+
+            width: 100%;
+
+            padding: 16px 5%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .login-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .login-brand-icon {
+            width: 56px;
+            height: 56px;
+
+            border-radius: 17px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffb52e,
+                    #ff9218
+                );
+
+            color: white;
+
+            font-size: 25px;
+            font-weight: bold;
+
+            box-shadow:
+                0 10px 30px rgba(255, 159, 28, 0.25);
+        }
+
+        .login-brand-name {
+            color: white;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .login-brand-name span {
+            color: #ff9f1c;
+        }
+
+        .login-brand-tagline {
+            color: #dbeafe;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .create-account-top {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+
+            color: white;
+            font-size: 14px;
+        }
+
+        .create-account-top a {
+            padding: 12px 22px;
+
+            border-radius: 25px;
+
+            background: white;
+            color: #12356b;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: 0.25s ease;
+        }
+
+        .create-account-top a:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.20);
+        }
+
+
+        /* =====================================================
+           MAIN LOGIN AREA
+        ===================================================== */
+
+        .login-layout {
+            position: relative;
+            z-index: 5;
+
+            width: 100%;
+            min-height: calc(100vh - 88px);
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            align-items: center;
+
+            gap: 70px;
+
+            padding: 25px 9% 55px;
+        }
+
+
+        /* =====================================================
+           LEFT SIDE
+        ===================================================== */
+
+        .login-intro {
+            color: white;
+            max-width: 620px;
+        }
+
+        .login-intro-small {
+            color: #63dfff;
+
+            font-family: Georgia, serif;
+
+            font-size: 34px;
+
+            font-style: italic;
+
+            margin-bottom: 5px;
+        }
+
+        .login-intro h1 {
+            margin: 0 0 20px;
+
+            font-size: clamp(52px, 5vw, 76px);
+
+            line-height: 1;
+
+            letter-spacing: -3px;
+        }
+
+        .login-intro h1 span {
+            color: #ff9f1c;
+        }
+
+        .login-intro-description {
+            max-width: 570px;
+
+            color: #e2e8f0;
+
+            font-size: 17px;
+
+            line-height: 1.6;
+
+            margin-bottom: 28px;
+        }
+
+
+        /* Features */
+
+        .login-features {
+            display: grid;
+            gap: 14px;
+        }
+
+        .login-feature {
+            display: flex;
+            align-items: center;
+
+            gap: 14px;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+
+            border: 1px solid rgba(255,255,255,0.45);
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-size: 18px;
+
+            background: rgba(255,255,255,0.06);
+        }
+
+        .feature-text strong {
+            display: block;
+
+            color: white;
+
+            font-size: 16px;
+
+            margin-bottom: 3px;
+        }
+
+        .feature-text span {
+            color: #bfdbfe;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           LOGIN CARD
+        ===================================================== */
+
+        .login-container {
+            width: 100%;
+            max-width: 500px;
+
+            justify-self: end;
+
+            padding: 40px;
+
+            background: rgba(255,255,255,0.98);
+
+            border-radius: 26px;
+
+            border: 1px solid rgba(255,255,255,0.8);
+
+            box-shadow:
+                0 35px 90px rgba(0,0,0,0.35);
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 6px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00c6ff,
+                    #315fc9,
+                    #7c3aed,
+                    #ff9f1c
+                );
+        }
+
+        .login-logo {
+            width: 60px;
+            height: 60px;
+
+            border-radius: 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffb52e,
+                    #ff9218
+                );
+
+            color: white;
+
+            font-size: 24px;
+
+            margin-bottom: 20px;
+        }
+
+        .login-container h2 {
+            margin: 0 0 8px;
+
+            color: #0b2450;
+
+            font-size: 32px;
+        }
+
+        .login-container h2 span {
+            color: #ff9f1c;
+        }
+
+        .login-subtitle {
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        #loginForm {
+            display: flex;
+            flex-direction: column;
+
+            gap: 14px;
+        }
+
+        #loginForm label {
+            color: #10254a;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-bottom: -7px;
+        }
+
+        #loginForm input {
+            width: 100%;
+
+            height: 52px;
+
+            border: 1px solid #d8e1ee;
+
+            border-radius: 11px;
+
+            background: #f6f9fd;
+
+            padding: 0 16px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            color: #172033;
+
+            transition: 0.25s ease;
+        }
+
+        #loginForm input:focus {
+            background: white;
+
+            border-color: #2872df;
+
+            box-shadow:
+                0 0 0 4px rgba(40,114,223,0.10);
+        }
+
+        .login-options {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-top: 2px;
+
+            margin-bottom: 5px;
+
+            font-size: 13px;
+        }
+
+        .remember-option {
+            display: flex;
+            align-items: center;
+
+            gap: 7px;
+
+            color: #64748b;
+        }
+
+        .remember-option input {
+            width: auto !important;
+            height: auto !important;
+        }
+
+        .forgot-password {
+            color: #1858c7;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .forgot-password:hover {
+            color: #ff9f1c;
+        }
+
+
+        /* =====================================================
+           LOGIN BUTTON
+        ===================================================== */
+
+        #loginForm button {
+            width: 100%;
+
+            height: 54px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2459bd,
+                    #3474df
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 4px;
+
+            transition: 0.25s ease;
+
+            box-shadow:
+                0 12px 25px rgba(37,89,189,0.20);
+        }
+
+        #loginForm button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 16px 30px rgba(37,89,189,0.30);
+        }
+
+
+        /* =====================================================
+           REGISTER LINK
+        ===================================================== */
+
+        .register-text {
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-top: 22px !important;
+        }
+
+        .register-text a {
+            color: #1858c7;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .register-text a:hover {
+            color: #ff9f1c;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            body.login-page {
+                overflow-y: auto;
+            }
+
+            .login-layout {
+                grid-template-columns: 1fr;
+
+                padding: 35px 6% 50px;
+
+                gap: 35px;
+            }
+
+            .login-intro {
+                max-width: 700px;
+            }
+
+            .login-container {
+                justify-self: center;
+            }
+
+            .login-intro h1 {
+                font-size: 58px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .login-topbar {
+                padding: 14px 5%;
+            }
+
+            .login-brand-icon {
+                width: 46px;
+                height: 46px;
+            }
+
+            .login-brand-name {
+                font-size: 22px;
+            }
+
+            .login-brand-tagline {
+                display: none;
+            }
+
+            .create-account-top > span {
+                display: none;
+            }
+
+            .create-account-top a {
+                padding: 10px 15px;
+                font-size: 12px;
+            }
+
+            .login-layout {
+                padding: 25px 5% 40px;
+            }
+
+            .login-intro-small {
+                font-size: 25px;
+            }
+
+            .login-intro h1 {
+                font-size: 45px;
+                letter-spacing: -2px;
+            }
+
+            .login-intro-description {
+                font-size: 14px;
+            }
+
+            .login-container {
+                padding: 32px 25px;
+            }
+
+            .login-container h2 {
+                font-size: 27px;
+            }
+        }
+    </style>
 </head>
 
-<body>
 
-    <div class="login-container">
+<body class="login-page">
 
-        <h1>ArshuMart</h1>
+    <!-- =====================================================
+         TOP HEADER
+    ====================================================== -->
 
-        <p>Welcome to ArshuMart</p>
+    <header class="login-topbar">
 
-        <form id="loginForm"></form>
-            <input type="text" placeholder="Enter Username" required>
+        <div class="login-brand">
 
-            <input type="password" placeholder="Enter Password" required>
+            <div class="login-brand-icon">
+                🛍
+            </div>
 
-            <button type="submit">Login</button>
-        </form>
+            <div>
+                <div class="login-brand-name">
+                    Arshu<span>Mart</span>
+                </div>
 
-        <p class="register-text">
-            New to ArshuMart?
-            <a href="register.html">Create Account</a>
-        </p>
+                <div class="login-brand-tagline">
+                    Smart Shopping. Better Choices.
+                </div>
+            </div>
 
-    </div>
-<script>
-    document.getElementById("loginForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        window.location.href = "products.html";
-    });
-</script>
-    <script src="js/script.js"></script>
+        </div>
+
+
+        <div class="create-account-top">
+
+            <span>Don't have an account?</span>
+
+            <a href="register.html">
+                Create Account
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN LOGIN AREA
+    ====================================================== -->
+
+    <main class="login-layout">
+
+
+        <!-- LEFT SIDE -->
+
+        <section class="login-intro">
+
+            <div class="login-intro-small">
+                Welcome to
+            </div>
+
+            <h1>
+                Arshu<span>Mart</span>
+            </h1>
+
+            <p class="login-intro-description">
+                Discover products you love, explore new favourites
+                and enjoy a smarter way to shop.
+            </p>
+
+
+            <div class="login-features">
+
+                <div class="login-feature">
+
+                    <div class="feature-icon">
+                        ▶
+                    </div>
+
+                    <div class="feature-text">
+                        <strong>Wide Range</strong>
+                        <span>Top brands & latest products</span>
+                    </div>
+
+                </div>
+
+
+                <div class="login-feature">
+
+                    <div class="feature-icon">
+                        ◇
+                    </div>
+
+                    <div class="feature-text">
+                        <strong>Secure Shopping</strong>
+                        <span>Your data stays protected</span>
+                    </div>
+
+                </div>
+
+
+                <div class="login-feature">
+
+                    <div class="feature-icon">
+                        □
+                    </div>
+
+                    <div class="feature-text">
+                        <strong>Fast Delivery</strong>
+                        <span>Get your orders on time</span>
+                    </div>
+
+                </div>
+
+
+                <div class="login-feature">
+
+                    <div class="feature-icon">
+                        ◆
+                    </div>
+
+                    <div class="feature-text">
+                        <strong>Best Prices</strong>
+                        <span>More value for your money</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LOGIN CARD -->
+
+        <section class="login-container">
+
+            <div class="login-logo">
+                🛍
+            </div>
+
+            <h2>
+                Login to Arshu<span>Mart</span>
+            </h2>
+
+            <p class="login-subtitle">
+                Welcome back! Please enter your details to continue
+                your shopping journey.
+            </p>
+
+
+            <form id="loginForm">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email address"
+                    required
+                >
+
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+
+                <div class="login-options">
+
+                    <label class="remember-option">
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+
+                        <span>Remember me</span>
+
+                    </label>
+
+                    <a
+                        href="#"
+                        class="forgot-password"
+                        onclick="return false;"
+                    >
+                        Forgot password?
+                    </a>
+
+                </div>
+
+
+                <button type="submit">
+                    Login &nbsp; →
+                </button>
+
+            </form>
+
+
+            <p class="register-text">
+                New to ArshuMart?
+                <a href="register.html">
+                    Create Account →
+                </a>
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         LOGIN JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        const loginForm = document.getElementById("loginForm");
+
+        loginForm.addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =
+                document.getElementById("password").value.trim();
+
+            const button =
+                loginForm.querySelector("button");
+
+            button.disabled = true;
+
+            button.textContent = "Logging in...";
+
+
+            try {
+
+                const response = await fetch(
+                    "http://localhost:8080/api/login",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            email: email,
+                            password: password
+                        })
+                    }
+                );
+
+
+                const result = await response.json();
+
+
+                if (result.success) {
+
+                    localStorage.setItem(
+                        "arshuMartUser",
+                        JSON.stringify({
+                            id: result.userId,
+                            name: result.name,
+                            email: email,
+                            role: result.role
+                        })
+                    );
+
+
+                    /* Keep userId separately for compatibility */
+
+                    localStorage.setItem(
+                        "userId",
+                        result.userId
+                    );
+
+
+                    /* Redirect based on role */
+
+                    if (result.role === "seller") {
+
+                        window.location.href =
+                            "products.html";
+
+                    } else if (result.role === "admin") {
+
+                        window.location.href =
+                            "products.html";
+
+                    } else {
+
+                        window.location.href =
+                            "products.html";
+                    }
+
+                } else {
+
+                    alert(
+                        result.message ||
+                        "Invalid email or password."
+                    );
+
+                    button.disabled = false;
+
+                    button.textContent = "Login  →";
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Unable to connect to server. " +
+                    "Please make sure ArshuMart backend is running."
+                );
+
+                button.disabled = false;
+
+                button.textContent = "Login  →";
+            }
+
+        });
+
+    </script>
 
 </body>
 </html>
-```

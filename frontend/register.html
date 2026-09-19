@@ -1,52 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>ArshuMart - Create Account</title>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+
+            background:
+                radial-gradient(circle at 85% 15%, rgba(70, 110, 220, 0.35), transparent 28%),
+                radial-gradient(circle at 10% 85%, rgba(40, 75, 150, 0.45), transparent 30%),
+                linear-gradient(135deg, #07152f, #102d63, #243d83);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+        .register-page {
+            width: 100%;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+        }
+
+        .register-card {
+            width: 430px;
+            max-width: 90%;
+
+            background: rgba(255, 255, 255, 0.98);
+
+            border-radius: 24px;
+
+            padding: 38px 42px;
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.30);
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .register-logo {
+            width: 55px;
+            height: 55px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 16px;
+
+            background: linear-gradient(
+                135deg,
+                #ffb21c,
+                #ff9418
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-shadow:
+                0 8px 20px rgba(255, 153, 0, 0.30);
+        }
+
+        .register-logo span {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .register-card h1 {
+            margin: 0;
+
+            text-align: center;
+
+            font-size: 31px;
+
+            color: #10254d;
+        }
+
+        .register-card h1 span {
+            color: #ff9900;
+        }
+
+        .register-subtitle {
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            margin: 8px 0 28px;
+        }
+
+        .register-form {
+            display: flex;
+            flex-direction: column;
+
+            gap: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+        .input-group label {
+            font-size: 13px;
+
+            font-weight: bold;
+
+            color: #263b61;
+        }
+
+        .input-group input,
+        .input-group select {
+
+            width: 100%;
+
+            height: 48px;
+
+            padding: 0 15px;
+
+            border: 1px solid #d5deed;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            color: #172033;
+
+            background: #f4f7fc;
+
+            box-sizing: border-box;
+
+            transition: 0.2s ease;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+
+            border-color: #2d5fd3;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px rgba(45, 95, 211, 0.10);
+        }
+
+        .create-account-btn {
+
+            width: 100%;
+
+            height: 49px;
+
+            margin-top: 5px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2457d6,
+                    #3970dc
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 22px rgba(36, 87, 214, 0.25);
+
+            transition: 0.2s ease;
+        }
+
+        .create-account-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 13px 26px rgba(36, 87, 214, 0.32);
+        }
+
+        .login-link {
+
+            text-align: center;
+
+            margin: 22px 0 0;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+        .login-link a {
+
+            color: #43209a;
+
+            font-weight: bold;
+
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .security-note {
+
+            text-align: center;
+
+            margin-top: 16px;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+        }
+
+        .decor-circle-one {
+
+            position: absolute;
+
+            width: 260px;
+            height: 260px;
+
+            border-radius: 50%;
+
+            background: rgba(77, 125, 230, 0.13);
+
+            top: -100px;
+            right: -70px;
+        }
+
+        .decor-circle-two {
+
+            position: absolute;
+
+            width: 230px;
+            height: 230px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 167, 30, 0.08);
+
+            bottom: -110px;
+            left: -70px;
+        }
+
+        @media (max-width: 600px) {
+
+            .register-card {
+                padding: 30px 25px;
+            }
+
+            .register-card h1 {
+                font-size: 27px;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 <body>
 
-    <div class="login-container">
+    <div class="register-page">
 
-        <h1>ArshuMart</h1>
+        <div class="decor-circle-one"></div>
+        <div class="decor-circle-two"></div>
 
-        <p>Create your account</p>
+        <div class="register-card">
 
-        <form>
+            <div class="register-logo">
+                <span>🛍</span>
+            </div>
 
-            <input type="text" placeholder="Enter Full Name" required>
+            <h1>
+                Create your <span>ArshuMart</span> account
+            </h1>
 
-            <input type="email" placeholder="Enter Email" required>
+            <p class="register-subtitle">
+                Join ArshuMart and start your smarter shopping journey.
+            </p>
 
-            <input type="password" placeholder="Create Password" required>
 
-            <select required>
-                <option value="">Select Role</option>
-                <option value="buyer">Buyer</option>
-                <option value="seller">Seller</option>
-            </select>
+            <form id="registerForm" class="register-form">
 
-            <button type="submit">Create Account</button>
 
-        <form id="registerForm"></form>
+                <div class="input-group">
 
-        <p class="register-text">
-            Already have an account?
-            <a href="index.html">Login</a>
-        </p>
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email address"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create a password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="role">
+                        Account Type
+                    </label>
+
+                    <select id="role" required>
+
+                        <option value="">
+                            Select account type
+                        </option>
+
+                        <option value="buyer">
+                            Buyer
+                        </option>
+
+                        <option value="seller">
+                            Seller
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="create-account-btn"
+                >
+                    Create Account →
+                </button>
+
+            </form>
+
+
+            <p class="login-link">
+
+                Already have an account?
+
+                <a href="index.html">
+                    Login
+                </a>
+
+            </p>
+
+
+            <p class="security-note">
+                Your ArshuMart account helps keep your shopping experience organized.
+            </p>
+
+        </div>
 
     </div>
-<script>
-    document.getElementById("registerForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        window.location.href = "index.html";
-    });
-</script>
-    <script src="js/script.js"></script>
+
+
+    <script>
+
+        document
+            .getElementById("registerForm")
+            .addEventListener("submit", async function(event) {
+
+                event.preventDefault();
+
+
+                const name =
+                    document.getElementById("name").value.trim();
+
+                const email =
+                    document.getElementById("email").value.trim();
+
+                const password =
+                    document.getElementById("password").value;
+
+                const role =
+                    document.getElementById("role").value;
+
+
+                try {
+
+                    const response = await fetch(
+                        "http://127.0.0.1:8080/api/register",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                name: name,
+                                email: email,
+                                password: password,
+                                role: role
+                            })
+                        }
+                    );
+
+
+                    const result =
+                        await response.json();
+
+
+                    if (result.success) {
+
+                        alert(
+                            "Account created successfully!"
+                        );
+
+                        window.location.href =
+                            "index.html";
+
+                    } else {
+
+                        alert(
+                            result.message
+                        );
+
+                    }
+
+                } catch (error) {
+
+                    alert(
+                        "Unable to connect to ArshuMart server."
+                    );
+
+                    console.error(error);
+
+                }
+
+            });
+
+    </script>
 
 </body>
+
 </html>

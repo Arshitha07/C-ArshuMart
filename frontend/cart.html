@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ArshuMart - Shopping Cart</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="cart-page">
+
+    <header class="products-header">
+
+        <div class="brand">
+            <h1>ArshuMart</h1>
+            <p>Smart Shopping. Better Choices.</p>
+        </div>
+
+        <div class="header-actions">
+
+            <button
+                type="button"
+                onclick="window.location.href='products.html'"
+            >
+                Continue Shopping
+            </button>
+
+            <button type="button">
+                My Account
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="cart-main">
+
+        <section class="cart-title-section">
+
+            <h2>Your Shopping Cart</h2>
+
+            <p>
+                Review your selected products before checkout.
+            </p>
+
+        </section>
+
+
+        <section class="cart-layout">
+
+            <div class="cart-items-card">
+
+                <div class="cart-card-header">
+                    <h3>Cart Items</h3>
+                    <span id="cartCount">0 items</span>
+                </div>
+
+                <div id="cartItems" class="cart-items">
+
+                    <div class="empty-cart">
+
+                        <div class="empty-cart-icon">
+                            🛒
+                        </div>
+
+                        <h3>Your cart is empty</h3>
+
+                        <p>
+                            You haven't added any products yet.
+                        </p>
+
+                        <button
+                            type="button"
+                            onclick="window.location.href='products.html'"
+                        >
+                            Start Shopping
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="cart-summary-card">
+
+                <h3>Order Summary</h3>
+
+                <div class="summary-row">
+
+                    <span>Total Items</span>
+
+                    <strong id="summaryCount">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-row total-row">
+
+                    <span>Total Amount</span>
+
+                    <strong id="cartTotal">
+                        ₹0
+                    </strong>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="checkout-button"
+                    id="checkoutButton"
+                >
+                    Proceed to Checkout
+                </button>
+
+                <p class="secure-text">
+                    Secure and simple checkout
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>© 2026 ArshuMart. All Rights Reserved.</p>
+
+    </footer>
+
+
+    <script src="js/cart.js"></script>
+</body>
+
+</html>
